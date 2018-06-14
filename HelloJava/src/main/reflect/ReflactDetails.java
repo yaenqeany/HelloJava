@@ -1,8 +1,12 @@
 package main.reflect;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Properties;
 
 public class ReflactDetails {
     /**
@@ -188,5 +192,53 @@ public class ReflactDetails {
         m.setAccessible(true);//解除私有限定
         Object result = m.invoke(obj, 20);//需要两个参数，一个是要调用的对象（获取有反射），一个是实参
         System.out.println("返回值：" + result);
+    }
+
+    public void reflectMain(){
+        try {
+            //1、获取Student对象的字节码
+            Class clazz = Class.forName("main.reflect.Student");
+
+            //2、获取main方法
+            Method methodMain = clazz.getMethod("main", String[].class);//第一个参数：方法名称，第二个参数：方法形参的类型，
+            //3、调用main方法
+            // methodMain.invoke(null, new String[]{"a","b","c"});
+            //第一个参数，对象类型，因为方法是static静态的，所以为null可以，第二个参数是String数组，
+            // 这里要注意在jdk1.4时是数组，jdk1.5之后是可变参数
+            //这里拆的时候将  new String[]{"a","b","c"} 拆成3个对象。。。所以需要将它强转。
+//            methodMain.invoke(null, (Object)new String[]{"a","b","c"});//方式一
+             methodMain.invoke(null, new Object[]{new String[]{"a","b","c"}});//方式二
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void byProperties() {
+        Properties pro = new Properties();//获取配置文件的对象
+        try {
+            FileReader in = new FileReader("HelloJava\\src\\main\\resources\\pro.properties");//获取输入流
+            pro.load(in);//将流加载到配置文件对象中
+            in.close();
+            //通过反射获取Class对象
+            Class stuClass = Class.forName(pro.getProperty("className"));
+            //2获取show()方法
+            Method m = stuClass.getMethod(pro.getProperty("methodName"));
+            //3.调用show()方法
+            m.invoke(stuClass.getConstructor().newInstance());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -1,20 +1,18 @@
 package main.reflect;
 
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 public class Test {
     public static void main(String[] args) {
         ReflactDetails details = new ReflactDetails();
-        details.getClassMsg();
+//        details.getClassMsg();
 
 
         try {
-            details.getConstructors();
-            details.getFields();
-            details.getMethodsMsg();
+//            details.getConstructors();
+//            details.getFields();
+//            details.getMethodsMsg();
+//            details.reflectMain();
+            details.byProperties();
         } catch (Exception e) {
             e.printStackTrace();
         }
