@@ -12,7 +12,8 @@ public class Test {
 //            details.getFields();
 //            details.getMethodsMsg();
 //            details.reflectMain();
-            details.byProperties();
+//            details.byProperties();
+            details.reflectGeneric();
         } catch (Exception e) {
             e.printStackTrace();
         }

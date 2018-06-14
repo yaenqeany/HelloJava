@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class ReflactDetails {
@@ -202,12 +203,18 @@ public class ReflactDetails {
             //2、获取main方法
             Method methodMain = clazz.getMethod("main", String[].class);//第一个参数：方法名称，第二个参数：方法形参的类型，
             //3、调用main方法
-            // methodMain.invoke(null, new String[]{"a","b","c"});
+            // methodMain.invoke(null, new String[]{"a","b","c"});//java.lang.IllegalArgumentException: argument type mismatch
             //第一个参数，对象类型，因为方法是static静态的，所以为null可以，第二个参数是String数组，
-            // 这里要注意在jdk1.4时是数组，jdk1.5之后是可变参数
+            /*启动Java程序的main方法的参数是一个字符串数组，
+                按照jdk1.5的语法，整个数组是一个参数，而按照jdk1.4的语法，数组中的每一个元素对应一个参数，
+                当把一个字符串数组作为参数传递给invoke方法时，javac会按照jdk1.4的语法进行处理，
+                因为jdk1.5肯定要兼容jdk1.4的语法，也就是把数组打散成若干个单独的参数，
+                所以也就会出现上面的异常了。
+                既然字符串数组会拆包成一个个的对象参数，那么我们就在这个字符串的外面再套上一层外衣，
+                当拆包的时候只是拆掉外面的那层，里面的字符串数组就可以作为一个单独的参数进行传递了*/
             //这里拆的时候将  new String[]{"a","b","c"} 拆成3个对象。。。所以需要将它强转。
-//            methodMain.invoke(null, (Object)new String[]{"a","b","c"});//方式一
-             methodMain.invoke(null, new Object[]{new String[]{"a","b","c"}});//方式二
+            methodMain.invoke(null, (Object)new String[]{"a","b","c"});//方式一
+//            methodMain.invoke(null, new Object[]{new String[]{"a","b","c"}});//方式二
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -226,6 +233,11 @@ public class ReflactDetails {
             Method m = stuClass.getMethod(pro.getProperty("methodName"));
             //3.调用show()方法
             m.invoke(stuClass.getConstructor().newInstance());
+            /**
+             * 需求：
+             * 当我们升级这个系统时，不要Student类，而需要新写一个Student2的类时，
+             * 这时只需要更改pro.properties的文件内容就可以了。代码就一点不用改动
+             */
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
@@ -240,5 +252,33 @@ public class ReflactDetails {
             e.printStackTrace();
         }
 
+    }
+
+    public void reflectGeneric() {
+        ArrayList<String> strList = new ArrayList<>();
+        strList.add("aaa");
+        strList.add("bbb");
+
+        //  strList.add(100);
+        //获取ArrayList的Class对象，反向的调用add()方法，添加数据
+        Class listClass = strList.getClass(); //得到 strList 对象的字节码 对象
+        try {
+            Method m = null;
+            //获取add()方法
+            m = listClass.getMethod("add", Object.class);
+            //调用add()方法
+            m.invoke(strList, 100);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        //遍历集合
+        for(Object obj : strList){
+            System.out.println(obj);
+        }
     }
 }
