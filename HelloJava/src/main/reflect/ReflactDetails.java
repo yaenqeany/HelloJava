@@ -221,7 +221,7 @@ public class ReflactDetails {
         }
     }
 
-    public void byProperties() {
+    public void readProperties() {
         Properties pro = new Properties();//获取配置文件的对象
         try {
             FileReader in = new FileReader("HelloJava\\src\\main\\resources\\pro.properties");//获取输入流
