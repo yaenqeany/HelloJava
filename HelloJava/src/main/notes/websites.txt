@@ -1,0 +1,24 @@
+1、Spring快速入门——易百教程
+https://www.yiibai.com/spring/spring-tutorial-for-beginners.html
+
+2、Spring：源码解读Spring IOC原理
+https://www.cnblogs.com/ITtangtang/p/3978349.html
+
+3、Java反射机制及IoC原理
+https://www.cnblogs.com/Eason-S/p/5851078.html
+
+4、Git Bash使用详细教程
+https://blog.csdn.net/wangrenbao123/article/details/55511461
+
+5、Java基础之—反射
+https://blog.csdn.net/sinat_38259539/article/details/71799078
+
+6、Java并发编程与技术内幕
+https://blog.csdn.net/column/details/javahhighconcurrence.html
+
+7、Java多线程学习（吐血超详细总结）
+https://www.cnblogs.com/GarfieldEr007/p/5746362.html
+
+8、Java中Properties类的操作
+https://www.cnblogs.com/bakari/p/3562244.html
+
