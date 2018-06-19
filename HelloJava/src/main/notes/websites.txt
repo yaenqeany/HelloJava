@@ -22,3 +22,5 @@ https://www.cnblogs.com/GarfieldEr007/p/5746362.html
 8、Java中Properties类的操作
 https://www.cnblogs.com/bakari/p/3562244.html
 
+9、FreeMarker在线手册
+http://freemarker.foofun.cn/dgui_quickstart_basics.html
