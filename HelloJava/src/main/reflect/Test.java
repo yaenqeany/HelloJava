@@ -13,7 +13,8 @@ public class Test {
 //            details.getMethodsMsg();
 //            details.reflectMain();
 //            details.readProperties();
-            details.reflectGeneric();
+//            details.reflectGeneric();
+            details.reflectSingleton();
         } catch (Exception e) {
             e.printStackTrace();
         }

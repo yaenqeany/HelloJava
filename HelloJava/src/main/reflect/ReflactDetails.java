@@ -195,6 +195,9 @@ public class ReflactDetails {
         System.out.println("返回值：" + result);
     }
 
+    /**
+     * 获取main方法
+     */
     public void reflectMain(){
         try {
             //1、获取Student对象的字节码
@@ -221,10 +224,13 @@ public class ReflactDetails {
         }
     }
 
+    /**
+     * 读取配置文件
+     */
     public void readProperties() {
         Properties pro = new Properties();//获取配置文件的对象
         try {
-            FileReader in = new FileReader("HelloJava\\src\\main\\resources\\pro.properties");//获取输入流
+            FileReader in = new FileReader("HelloJava\\resources\\pro.properties");//获取输入流
             pro.load(in);//将流加载到配置文件对象中
             in.close();
             //通过反射获取Class对象
@@ -236,7 +242,7 @@ public class ReflactDetails {
             /**
              * 需求：
              * 当我们升级这个系统时，不要Student类，而需要新写一个Student2的类时，
-             * 这时只需要更改pro.properties的文件内容就可以了。代码就一点不用改动
+             * 这时只需要更改pro.properties的文件内容就可以了。代码一点都不用改动
              */
         } catch (IOException e) {
             e.printStackTrace();
@@ -254,6 +260,9 @@ public class ReflactDetails {
 
     }
 
+    /**
+     * 破坏泛型
+     */
     public void reflectGeneric() {
         ArrayList<String> strList = new ArrayList<>();
         strList.add("aaa");
@@ -279,6 +288,40 @@ public class ReflactDetails {
         //遍历集合
         for(Object obj : strList){
             System.out.println(obj);
+        }
+    }
+
+    /**
+     * 破坏单例,以及单例防止破坏
+     */
+    public void reflectSingleton() {
+        SingletonStudent singletonStudent = SingletonStudent.getInstance();
+        SingletonStudent2 singletonStudent_2 = SingletonStudent2.getInstance();
+        try {
+            Constructor constructor = singletonStudent.getClass().getDeclaredConstructor();
+            constructor.setAccessible(true);
+            SingletonStudent singletonStudent1 = (SingletonStudent) constructor.newInstance();
+            SingletonStudent singletonStudent2 = (SingletonStudent) constructor.newInstance();
+
+            System.out.println(singletonStudent.hashCode());
+            System.out.println(singletonStudent1.hashCode());
+            System.out.println("----------------------------------");
+            Constructor constructor2 = singletonStudent_2.getClass().getDeclaredConstructor();
+            constructor2.setAccessible(true);
+            SingletonStudent2 singletonStudent_21 = (SingletonStudent2) constructor2.newInstance();
+            SingletonStudent2 singletonStudent_22 = (SingletonStudent2) constructor2.newInstance();
+
+            System.out.println(singletonStudent_22.hashCode());
+            System.out.println(singletonStudent_21.hashCode());
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
     }
 }
