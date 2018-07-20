@@ -123,7 +123,7 @@ public class IoDemo {
     }
 
     /**
-     * 对象读写
+     * 对象读写 被写入的对象必须实现Serializable接口
      * @param file
      * @param objects
      */
