@@ -1,6 +1,8 @@
 package main.file_io;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IoDemo {
     public static void main(String[] args) {
@@ -14,7 +16,24 @@ public class IoDemo {
         }
         IoDemo ioDemo = new IoDemo();
 //        ioDemo.fileReadByStresm(file);
-        ioDemo.fileReadByReader(file);
+//        ioDemo.fileReadByReader(file);
+
+        List<Object> objects = new ArrayList<>();
+        objects.add(new Person("smith", 20));
+        objects.add(new Person("lily", 22));
+        objects.add(new Person("lisha", 25));
+        objects.add(new Person("john", 30));
+        ioDemo.objectWrite(file, objects);
+
+        ObjectInputStream objectInputStream = null;
+        try {
+            objectInputStream = new ObjectInputStream(new FileInputStream(file));
+            System.out.println(objectInputStream.readObject());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void fileReadByStresm(File file) {
@@ -99,6 +118,24 @@ public class IoDemo {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+
+    /**
+     * 对象读写
+     * @param file
+     * @param objects
+     */
+    public void objectWrite(File file, List<Object> objects) {
+        if (null == file || !file.isFile() || null == objects || objects.isEmpty()) {
+            System.out.println("parameter error : file is null or not a file or object is null !");
+        } else {
+            try {
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
+                objectOutputStream.writeObject(objects);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
