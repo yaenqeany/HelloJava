@@ -8,12 +8,12 @@ public class FileUtil {
     public static void main(String[] args) {
         File file = new File("pro.properties");
         FileUtil fileUtil = new FileUtil();
-        String path = fileUtil.searchFile(file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separator)), "pro.properties");
-        System.out.println(path);
+       /* String path = fileUtil.searchFile("C:\\", "pro.properties");
+        System.out.println(path);*/
 
         System.out.println("------------------------------------------");
 
-        List<String> result = fileUtil.searchFiles(file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separator)), "pro.properties");
+        List<String> result = fileUtil.searchFiles("C:/git", "pro.properties");
         for (String tmp : result) {
             System.out.println(tmp);
         }
@@ -27,8 +27,8 @@ public class FileUtil {
      * @return null（不存在） or 文件的绝对路径
      */
     public String searchFile(String dirPath, String fileName) {
-        File project = new File(dirPath);
-        File[] files = project.listFiles();
+        File directory = new File(dirPath);
+        File[] files = directory.listFiles();
         String path = null;
         for (int i = 0; i < files.length; i++) {
             if (files[i].isFile()) {
@@ -56,8 +56,8 @@ public class FileUtil {
      * @return 文件的绝对路径的集合
      */
     public List<String> searchFiles(String dirPath, String fileName) {
-        File project = new File(dirPath);
-        File[] files = project.listFiles();
+        File directory = new File(dirPath);
+        File[] files = directory.listFiles();
         List<String> result = new ArrayList();
         for (int i = 0; i < files.length; i++) {
             if (files[i].isFile()) {
