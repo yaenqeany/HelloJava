@@ -41,7 +41,7 @@ public class Test {
             System.out.println(i);
         }*/
 
-        ArrayList<Integer> list = new ArrayList<Integer>();
+       /* ArrayList<Integer> list = new ArrayList<Integer>();
         Method method = null;
         try {
             method = list.getClass().getMethod("add", Object.class);
@@ -54,7 +54,7 @@ public class Test {
             e.printStackTrace();
         }
 
-        System.out.println(list.get(0));
+        System.out.println(list.get(0));*/
 
     }
 
