@@ -1,6 +1,7 @@
 package main.util;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,5 +77,35 @@ public class FileUtil {
             }
         }
         return result;
+    }
+
+    /**
+     * 使用filter过滤文件夹，搜索目标文件
+     *
+     * @param dirPath  文件夹绝对路径
+     * @param keywords 搜索关键字
+     * @return
+     */
+    public List<String> filterFiles(String dirPath, String keywords) {
+        File directory = new File(dirPath);
+        List<String> results = new ArrayList<>();
+        File[] files = directory.listFiles(pathname -> {
+            if (pathname.isDirectory() || (pathname.isFile() && pathname.getName().contains(keywords))) return true;
+            return false;
+        });
+
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isFile()) {
+                results.add(files[i].getAbsolutePath());
+            } else {
+                List<String> tmp = filterFiles(files[i].getAbsolutePath(), keywords);
+                if (tmp != null) {
+                    for (String name : tmp) {
+                        results.add(name);
+                    }
+                }
+            }
+        }
+        return results;
     }
 }
