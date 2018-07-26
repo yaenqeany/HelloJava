@@ -1,5 +1,7 @@
 package main.ClassClone;
 
+import main.util.CloneUtil;
+
 public class Test {
     public static void main(String[] args) {
         try {

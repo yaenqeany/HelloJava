@@ -1,4 +1,4 @@
-package main.ClassClone;
+package main.util;
 
 import java.io.*;
 
@@ -8,11 +8,14 @@ public class CloneUtil {
     }
 
     public static <T extends Serializable> T clone(T obj) throws Exception {
+        //将对象转换为流
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bout);
+        //写出到输出流中
         oos.writeObject(obj);
-
+        //输出流转化为输入流
         ByteArrayInputStream bin = new ByteArrayInputStream(bout.toByteArray());
+        //从输入流中读取对象信息
         ObjectInputStream ois = new ObjectInputStream(bin);
         return (T) ois.readObject();
 
