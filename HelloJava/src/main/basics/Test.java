@@ -1,9 +1,5 @@
 package main.basics;
 
-import main.string.StringOperator;
-
-import java.util.Arrays;
-
 /**
  * Created by asus1 on 2017-03-18.
  */
