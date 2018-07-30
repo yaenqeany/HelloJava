@@ -1,7 +1,6 @@
 package main.util;
 
-import java.io.File;
-import java.io.FileFilter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +11,13 @@ public class FileUtil {
        /* String path = fileUtil.searchFile("C:\\", "pro.properties");
         System.out.println(path);*/
 
-        System.out.println("------------------------------------------");
+       /* System.out.println("------------------------------------------");
 
         List<String> result = fileUtil.searchFiles("C:/git", "pro.properties");
         for (String tmp : result) {
             System.out.println(tmp);
-        }
+        }*/
+        fileUtil.copyFile("C:/IO.png","C:/New folder");
     }
 
     /**
@@ -107,5 +107,44 @@ public class FileUtil {
             }
         }
         return results;
+    }
+
+    public int copyFile(String filePath, String destPath) {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            return -1;
+        }
+        File dir = new File(destPath);
+        if (!dir.exists()) {
+            return -1;
+        }
+        File destFile = new File(dir,file.getName());
+        InputStream ins = null;
+        OutputStream ops = null;
+        try {
+            ins = new FileInputStream(file);
+            ops = new FileOutputStream(destFile);
+            while (true) {
+                int read = ins.read();
+                if (-1 != read) {
+                    ops.write(read);
+                } else {
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                ops.flush();
+                ops.close();
+                ins.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return 1;
     }
 }
