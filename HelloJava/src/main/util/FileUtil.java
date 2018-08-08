@@ -18,6 +18,9 @@ public class FileUtil {
             System.out.println(tmp);
         }*/
         fileUtil.copyFile("C:/IO.png","C:/New folder");
+
+        InputStream inputStream = new BufferedInputStream(new ByteArrayInputStream(new byte[4]));
+
     }
 
     /**
