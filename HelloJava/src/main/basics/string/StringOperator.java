@@ -64,12 +64,12 @@ public class StringOperator {
         String s5 = "Program" + "ming";
         String s6 = s3 + s4;
         String s7 = "Programming";
-        System.out.println(s1 == s2);
-        System.out.println(s1 == s5);
-        System.out.println(s1 == s6);
-        System.out.println(s1 == s6.intern());
-        System.out.println(s2 == s2.intern());
-        System.out.println(s1 == s7);
+        System.out.println(s1 == s2);//false
+        System.out.println(s1 == s5);//true
+        System.out.println(s1 == s6);//false
+        System.out.println(s1 == s6.intern());//true
+        System.out.println(s2 == s2.intern());//false
+        System.out.println(s1 == s7);//true
         System.out.println(".................................");
         System.out.println(s1.hashCode());
         System.out.println(s2.hashCode());
@@ -77,8 +77,13 @@ public class StringOperator {
         System.out.println(s2.intern().hashCode());
     }
 
+    /**
+     * 反转字符串
+     * @param originStr
+     * @return
+     */
     public static String reverse(String originStr) {
-        if(originStr == null || originStr.length() <= 1)
+        if (originStr == null || originStr.length() <= 1)
             return originStr;
         return reverse(originStr.substring(1)) + originStr.charAt(0);
     }

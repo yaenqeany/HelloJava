@@ -1,15 +1,21 @@
 package main;//import basics.Const;
 
+import main.basics.number.PaintDemo;
+import main.basics.number.numDemo;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Test {
     int anInt = 0;
 
     public static void main(String[] args) {
-/*
-        boolean result= numDemo.isOdd(-9);
+
+
+
+        /*boolean result= numDemo.isOdd(-9);
         System.out.println(result);
 
         BigDecimal bigDecimal1 = new BigDecimal(2.0);
@@ -18,9 +24,8 @@ public class Test {
         System.out.println(BigDecimal.ROUND_CEILING);
 
         System.out.println(bigDecimal1.subtract(bigDecimal2).floatValue());
-*/
 
-        /*PaintDemo paintDemo=new PaintDemo();
+        PaintDemo paintDemo=new PaintDemo();
         paintDemo.paintStar(10);*/
 
         /*Calendar calendar = Calendar.getInstance();
@@ -41,7 +46,7 @@ public class Test {
             System.out.println(i);
         }*/
 
-       /* ArrayList<Integer> list = new ArrayList<Integer>();
+       /* ArrayList<Integer> list = new ArrayList<Integer>();vbb
         Method method = null;
         try {
             method = list.getClass().getMethod("add", Object.class);
@@ -50,8 +55,7 @@ public class Test {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (IllegalAccessException e) {            e.printStackTrace();
         }
 
         System.out.println(list.get(0));*/
