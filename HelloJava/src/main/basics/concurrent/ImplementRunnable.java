@@ -17,14 +17,14 @@ public class ImplementRunnable implements Runnable {
      */
     @Override
     public void run() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.println(name + " 运行 :  " + i);
-            /*try {
+            try {
                 Thread.sleep((int) Math.random() * 100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }*/
-            if (i == 30) {
+            }
+            if (i == 3) {
                 Thread.yield();
             }
         }
