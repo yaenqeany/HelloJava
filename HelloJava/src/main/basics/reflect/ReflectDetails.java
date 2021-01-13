@@ -17,14 +17,18 @@ public class ReflectDetails {
      * 3 通过Class类的静态方法：forName（String  className）(常用)
      *
      * 在运行期间，一个类，只有一个Class对象产生。
-     * 三种方式常用第三种，第一种对象都有了还要反射干什么。第二种需要导入类的包，依赖太强，不导包就抛编译错误。
-     * 一般都第三种，一个字符串可以传入也可写在配置文件中等多种方法。
+     * 三种方式常用第三种，而第三种方式通常也正是大多场景需求的方式
+     * 对于第一种方式，既然对象都有了那么反射其实没有意义了。
+     * 第二种方式需要导入类的包，依赖太强，不导包将报编译错误。
+     * 对于第三种，字符串参数的传入可直接传或读配置文件或数据库等，在配置上也比较灵活。
      */
     public void getClassMsg(){
         //第一种方式获取Class对象
         Student stu1 = new Student();//这一new 产生一个Student对象，一个Class对象。
         Class stuClass = stu1.getClass();//获取Class对象
         System.out.println(stuClass.getName());
+        System.out.println(void.class);
+        System.out.println(int.class);
 
         //第二种方式获取Class对象
         Class stuClass2 = Student.class;
@@ -70,7 +74,7 @@ public class ReflectDetails {
         }
 
         System.out.println("*****************获取公有、无参的构造方法*******************************");
-        Constructor con = clazz.getConstructor();
+        Constructor con = clazz.getConstructor(null);
         //1、因为是无参的构造方法所以类型是一个null,不写也可以：这里需要的是一个参数的类型，切记是类型
         //2、返回的是描述这个无参构造函数的类对象。
 
